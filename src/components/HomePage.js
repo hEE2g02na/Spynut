@@ -1,8 +1,23 @@
-// src/components/HomePage.js
-import React from 'react';
+import React, { useEffect } from 'react';
 import '../styles/HomePage.css';
 
 function HomePage() {
+    useEffect(() => {
+        const script = document.createElement('script');
+        script.src = 'node_modules/rickroll.js/RickRoll.js';
+        script.async = true;
+        script.onload = () => {
+            if (typeof rickroll === 'function') {
+                rickroll();
+            }
+        };
+        document.body.appendChild(script);
+
+        return () => {
+            document.body.removeChild(script);
+        };
+    }, []);
+
     return (
         <div className="home">
             <section className="intro">
